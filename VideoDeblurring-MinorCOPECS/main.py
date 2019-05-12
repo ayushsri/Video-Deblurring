@@ -1,4 +1,4 @@
-import glob as gb # yeh kyun
+import glob as gb
 
 import numpy as np
 from PIL import Image
@@ -21,10 +21,10 @@ def train(batch_size, epoch_num):
     # generator use adversarial loss
 
 
-    g.load_weights('C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5')
+    g.load_weights('C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5')
     g.compile(optimizer='adam', loss=generator_loss)
     # discriminator use binary cross entropy loss
-    d.load_weights('C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/weight/discriminator_weights.h5')
+    d.load_weights('C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/weight/discriminator_weights.h5')
     d.compile(optimizer='adam', loss='binary_crossentropy')
     
 
@@ -34,7 +34,7 @@ def train(batch_size, epoch_num):
     for epoch in range(epoch_num):
         print('epoch: ', epoch + 1, '/', epoch_num)
         print('batches: ', int(x_train.shape[0] / batch_size))
-        #YEH KYA HAI UPAR
+        
         for index in range(int(x_train.shape[0] / batch_size)):
             # select a batch data
             image_blur_batch = x_train[index * batch_size:(index + 1) * batch_size]
@@ -70,19 +70,19 @@ def train(batch_size, epoch_num):
 
             # output weights for generator and discriminator each 30 iters
             # if (index % 30 == 0) and (index != 0):
-    g.save_weights('C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5', True)
-    d.save_weights('C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/weight/discriminator_weights.h5', True)
-                # g.save('C:/Users/tanay/Downloads/ImageDeblurring-master/ImageDeblurring-master/weight/generator_model.h5', True)
-                # d.save('C:/Users/tanay/Downloads/ImageDeblurring-master/ImageDeblurring-master/weight/discriminator_model.h5', True)
+    g.save_weights('C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5', True)
+    d.save_weights('C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/weight/discriminator_weights.h5', True)
+                # g.save('C:/Users/ayush/Downloads/ImageDeblurring-master/ImageDeblurring-master/weight/generator_model.h5', True)
+                # d.save('C:/Users/ayush/Downloads/ImageDeblurring-master/ImageDeblurring-master/weight/discriminator_model.h5', True)
 
 
 def test(batch_size):
     # Note the x(blur) in the second, the y(full) in the first
     y_test, x_test = data_utils.load_data(data_type='test')
     g = generator_model()
-    g.load_weights('C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5')
+    g.load_weights('C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/weight/generator_weights.h5')
     generated_images = g.predict(x=x_test, batch_size=batch_size)
-    data_utils.generate_image(y_test, x_test, generated_images, 'C:/Users/tanay/Downloads/VideoDeblurring-MinorCOPECS/result/')
+    data_utils.generate_image(y_test, x_test, generated_images, 'C:/Users/ayush/Downloads/VideoDeblurring-MinorCOPECS/result/')
 
 
 def test_pictures(batch_size):

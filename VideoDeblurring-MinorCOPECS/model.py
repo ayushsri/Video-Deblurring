@@ -11,14 +11,14 @@ from keras.utils.vis_utils import plot_model
 channel_rate = 16
 # Note the image_shape must be multiple of patch_shape
 image_shape = (128, 128, 3)
-patch_shape = (channel_rate, channel_rate, 3)# DEKH LENA
+patch_shape = (channel_rate, channel_rate, 3)
 
 
 # Dense Block
 def dense_block(inputs, dilation_factor=None):
     x = LeakyReLU(alpha=0.2)(inputs)
     x = Convolution2D(filters=channel_rate, kernel_size=(1, 1), padding='same')(x)
-    x = BatchNormalization()(x)# NEED TO SEE
+    x = BatchNormalization()(x)
     x = LeakyReLU(alpha=0.2)(x)
     # the 3 × 3 convolutions along the dense field are alternated between ‘spatial’ convolution
     # and ‘dilated’ convolution with linearly increasing dilation factor
@@ -35,10 +35,9 @@ def dense_block(inputs, dilation_factor=None):
 
 def generator_model():
     # Input Image, Note the shape is variable
-    inputs = Input(shape=(None, None, 3))# //WHAT IS  NONE NONE
-    # The Head
+    inputs = Input(shape=(None, None, 3))    # The Head
     h = Convolution2D(filters=channel_rate, kernel_size=(3, 3), padding='same')(inputs)
-    #//IS KERNEL SIZE IS FILTER SIZE
+    
     # The Dense Field
     d_1 = dense_block(inputs=h)
     x = concatenate([h, d_1])
@@ -73,14 +72,14 @@ def generator_model():
     x = LeakyReLU(alpha=0.2)(x)
 
     # Output Image
-    outputs = Convolution2D(filters=3, kernel_size=(3, 3), padding='same', activation='tanh')(x)# WHAT IS INPUT.
+    outputs = Convolution2D(filters=3, kernel_size=(3, 3), padding='same', activation='tanh')(x)# 
     model = Model(inputs=inputs, outputs=outputs, name='Generator')
     return model
 
 
 def discriminator_model():
     # PatchGAN
-    # WHAT IS PATCH GAN.
+   
     inputs = Input(shape=patch_shape)
     x = Convolution2D(filters=channel_rate, kernel_size=(3, 3), strides=(2, 2), padding="same")(inputs)
     x = BatchNormalization()(x)
@@ -98,12 +97,12 @@ def discriminator_model():
     x = BatchNormalization()(x)
     x = LeakyReLU(alpha=0.2)(x)
 
-    x = Flatten()(x)## WHAT IS FLATTEN X
+    x = Flatten()(x)
     outputs = Dense(units=1, activation='sigmoid')(x)
     model = Model(inputs=inputs, outputs=outputs, name='PatchGAN ')
     # model.summary()
 
-# discriminator #YEH SAMJHA DO
+# discriminator
     inputs = Input(shape=image_shape)
 
     list_row_idx = [(i * channel_rate, (i + 1) * channel_rate) for i in

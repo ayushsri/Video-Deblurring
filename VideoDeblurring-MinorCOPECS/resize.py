@@ -3,9 +3,9 @@ import cv2
 import numpy as np
 import random
 
-pathDataSet = 'C:/Users/tanay/Desktop/a/dataset'
+pathDataSet = 'C:/Users/ayush/Desktop/a/dataset'
 k = 7 //why k is 7..
-for f in os.listdir('C:/Users/tanay/Desktop/a/data'):
+for f in os.listdir('C:/Users/ayush/Desktop/a/data'):
 	if f.endswith('.jpg'):
 		name = f[:-4]        //
 		im = cv2.imread(f)    //

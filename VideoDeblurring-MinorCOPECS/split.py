@@ -2,8 +2,8 @@ import os
 import shutil
 
 c = 0
-partPath = 'C:/Users/tanay/Desktop/a/data/part'
-source = 'C:/Users/tanay/Desktop/a/dataset/'
+partPath = 'C:/Users/ayush/Desktop/a/data/part'
+source = 'C:/Users/ayush/Desktop/a/dataset/'
 part = 0
 
 os.mkdir(partPath + str(part) + '/')
